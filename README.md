@@ -45,22 +45,46 @@ npm start
 
 ### Usage
 
-To **register** a new user, send a `POST` request to `/api/users/register` with a JSON body containing the username, email, and password:
+To **register** a new user, send a `POST` request to `/appusers` with a JSON body containing the username, email, password, and other information:
 
 ```json
 {
-  "username": "exampleuser",
-  "email": "user@example.com",
-  "password": "password123"
+  "userId": "sdfsfsf",
+  "username": "john_doe",
+  "password": "password",
+  "email": "john.doe@example.com",
+  "mobile": "1234567890",
+  "displayPicture": "https://example.com/profile-picture.jpg"
 }
 ```
 
-To **login**, send a `POST` request to `/api/users/login` with the username and password:
+To **login**, send a `POST` request to `api/auth/login` with the username and password:
 
 ```json
 {
-  "username": "exampleuser",
-  "password": "password123"
+  "username": "john_doe",
+  "password": "password"
+}
+```
+
+To **update**, send a `PUT` request to `/appusers/{userId}` with the data that needs to be updated, send the access token as bearer token to avoid unauthorized error:
+
+```json
+{
+  "userId": "sdfsfsf",
+  "username": "john_doey",
+  "password": "password",
+  "email": "john.doe@example.com",
+  "mobile": "1234567890",
+  "displayPicture": "https://example.com/profile-picture.jpg"
+}
+```
+
+To **get the new tokens from backend**, send a `POST` request to `api/auth/token` with the access token in body:
+
+```json
+{
+  "token": "Whgu2Yh7qp2UFmdkG8o28POAodA"
 }
 ```
 
