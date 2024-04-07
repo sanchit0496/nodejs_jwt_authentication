@@ -2,7 +2,7 @@ const app = require('./app');
 const sequelize = require('./config/database');
 require('dotenv').config();
 
-const PORT = process.env.RDS_PORT || 3000;
+const PORT = process.env.RDS_PORT || 8080;
 console.log('process.env.RDS_PORT', process.env.RDS_PORT)
 
 

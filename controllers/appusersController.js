@@ -1,10 +1,22 @@
 const AppUser = require('../models/appUsers'); // Ensure this path points to your AppUser model
+const bcrypt = require('bcrypt');
 
 exports.createAppUser = async (req, res) => {
     try {
-        const newUser = await AppUser.create(req.body);
-        res.status(201).json(newUser);
+        // Hash the password before saving
+        const hashedPassword = await bcrypt.hash(req.body.password, 10); // 10 rounds
+        const newUserDetails = { ...req.body, password: hashedPassword };
+        
+        const newUser = await AppUser.create(newUserDetails);
+    
+        // Respond with the new user object (excluding password) and tokens
+        const { password, ...userWithoutPassword } = newUser.dataValues;
+        
+        res.status(201).json({
+            user: userWithoutPassword,
+        });
     } catch (err) {
+        console.error(err);
         res.status(400).json(err);
     }
 };
