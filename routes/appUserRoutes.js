@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/appUsersController');
 const { createUserSchema } = require('../validations/appUsersValidation');
-
+const authenticateToken = require('../middleware/authenticateToken')
 
 /**
  * @swagger
@@ -52,10 +52,10 @@ const validateUserCreation = (req, res, next) => {
 };
 
 // Define the CRUD routes for users
-router.post('/', validateUserCreation, userController.createAppUser);
-router.get('/:id', userController.getAppUserById);
-router.put('/:id', userController.updateAppUser);
-router.delete('/:id', userController.deleteAppUser);
-router.get('/', userController.getAllAppUsers);
+router.get('/:id', authenticateToken, userController.getAppUserById);
+router.post('/', userController.createAppUser);
+router.put('/:id', authenticateToken, userController.updateAppUser);
+router.delete('/:id', authenticateToken, userController.deleteAppUser);
+router.get('/', authenticateToken, userController.getAllAppUsers);
 
 module.exports = router;
