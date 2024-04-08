@@ -2,8 +2,8 @@ const app = require('./app');
 const sequelize = require('./config/database');
 require('dotenv').config();
 
-const PORT = 8080;
-// console.log('process.env.RDS_PORT', process.env.RDS_PORT)
+const PORT = process.env.RDS_PORT || 8080;
+console.log('process.env.RDS_PORT', process.env.RDS_PORT)
 
 
 sequelize.sync({ alter: true }) // This will check what is the current state of the table in the database (which columns it has, what are their data types, etc), and then perform the necessary changes in the table to make it match the model.
