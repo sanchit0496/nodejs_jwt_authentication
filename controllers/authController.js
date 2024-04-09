@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const AppUser = require('../models/appusers')
+const AppUser = require('../models/appUsers')
 const RefreshToken = require('../models/refreshToken')
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || 'your_access_token_secret'; // Should be an environment variable

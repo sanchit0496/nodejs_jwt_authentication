@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/appUsersController');
+const userController = require('../controllers/appusersController');
 const { createUserSchema } = require('../validations/appUsersValidation');
 const authenticateToken = require('../middleware/authenticateToken')
 
@@ -44,11 +44,11 @@ const authenticateToken = require('../middleware/authenticateToken')
 
 // Middleware for user validation
 const validateUserCreation = (req, res, next) => {
-    const { error } = createUserSchema.validate(req.body);
-    if (error) {
-      return res.status(400).json({ message: error.details[0].message });
-    }
-    next();
+  const { error } = createUserSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({ message: error.details[0].message });
+  }
+  next();
 };
 
 // Define the CRUD routes for users
